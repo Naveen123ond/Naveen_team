@@ -1,0 +1,29 @@
+import random
+import time
+
+class FloodMonitor:
+    def _init_(self):
+        self.sea_level_rise_rate = 0.02  # Sea level rise rate in meters per year
+        self.warning_threshold = 3.0    # Flood warning threshold in meters above normal
+
+    def simulate_data(self):
+        # Simulate sea level rise over time
+        sea_level = 0
+        while True:
+            sea_level += random.uniform(0, self.sea_level_rise_rate)
+            rainfall_intensity = random.uniform(0, 20)  # Simulate rainfall intensity
+            self.check_flood(sea_level, rainfall_intensity)
+            time.sleep(1)  # Simulate data updates every second
+
+    def check_flood(self, sea_level, rainfall_intensity):
+        total_water_level = sea_level + rainfall_intensity
+
+        if total_water_level > self.warning_threshold:
+            self.activate_warning(total_water_level)
+
+    def activate_warning(self, total_water_level):
+        print(f"Flood warning! Total water level is {total_water_level} meters above normal.")
+
+if _name_ == "_main_":
+    monitor = FloodMonitor()
+    monitor.simulate_data()
